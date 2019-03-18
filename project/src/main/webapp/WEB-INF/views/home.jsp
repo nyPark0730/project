@@ -8,87 +8,124 @@
     <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 </head>
 <body>
-<h1>
-	Hello world!
-</h1>
-<button type="button" id="getTotalToiletUseInfoBtn">전체 화장실 사용 현황</button><br><br>
+<h4>화장실 사용현황</h4>
+<button type="button" id="getTotalToiletUseInfoBtn" onclick="getTotalInfo('toilet');">전체 화장실 사용 현황</button><br><br>
 <hr />
-<input type="text" id="floor" />층의 <button type="button" id="getToiletUseInfoBtn">화장실 사용 현황</button><br><br>
+<input type="text" id="toiletfloor" />층의 <button type="button" id="getToiletUseInfoBtn"  onclick="getInfo('toilet');">화장실 사용 현황</button><br><br>
 <hr />
-센서코드 : <input type="text" id="code" />
-사용여부 : <input type="text" id="useyn" />
-<button type="button" id="updateToiletUseInfoBtn">사용여부 수정</button><br><br>
+센서코드 : <input type="text" id="toiletCode" />
+사용여부 : <input type="text" id="toiletUseyn" />
+<button type="button" id="updateToiletUseInfoBtn" onClick="updateInfo('toilet');">화장실 사용여부 수정</button><br><br>
+<hr />
+<h4>회의실 사용현황</h4>
+<button type="button" id="getTotalMeetingRoomUseInfoBtn" onclick="getTotalInfo('meetingRoom');">전체 회의실 사용 현황</button><br><br>
+<hr />
+<input type="text" id="meetingRoomfloor" />층의 <button type="button" id="getMeetingRoomUseInfoBtn" onclick="getInfo('meetingRoom');">회의실 사용 현황</button><br><br>
+<hr />
+센서코드 : <input type="text" id="meetingRoomCode" />
+사용여부 : <input type="text" id="meetingRoomUseyn" />
+<button type="button" id="updateMeetingRoomUseInfoBtn" onClick="updateInfo('meetingRoom');">회의실 사용여부 수정</button><br><br>
 
 </body>
 <script>
-$(document).ready(function () {
+/**
+ * 전체 사용여부 조회
+ */
+function getTotalInfo(mode) {
+	var url = "";
+	if (mode == "toilet") {
+		url = "/getTotalToiletUseInfo.do";
+	} else {
+		url = "/getTotalMeetingRoomUseInfo.do";
+	}
 	
-	// 전체 화장실 사용 현황 조회
-	$("#getTotalToiletUseInfoBtn").click(function () {
-		$.ajax({
-			url : "/getTotalToiletUseInfo.do",
-			type : "post",
-			dataType : "json",
-			success : function (data) {
-				console.log(data);
-			}
-		});
+	$.ajax({
+		url : url,
+		type : "post",
+		dataType : "json",
+		success : function (data) {
+			console.log(data);
+		}
 	});
+}
+
+/**
+ * 사용여부 조회
+ */
+function getInfo(mode) {
+	var url = "";
+	var floor = "";
+	if (mode == "toilet") {
+		url = "/getToiletUseInfo.do";
+		floor = $("#toiletfloor").val();
+	} else {
+		url = "/getMeetingRoomUseInfo.do";
+		floor = $("#meetingRoomfloor").val();
+	}
 	
-	// 특정 층의 화장실 사용 현황 조회
-	$("#getToiletUseInfoBtn").click(function () {
-		var floor = $("#floor").val();
-		if (0 == floor.length) {
-			alert("층을 입력해주세요.");
-			return ;
+	if (0 == floor.length) {
+		alert("층을 입력해주세요.");
+		return ;
+	}
+	
+	if (isNaN(floor)) {
+		alert("층은 숫자만 가능합니다.");
+		return ;
+	}
+	
+	$.ajax({
+		url : url,
+		type : "post",
+		data : { floor : floor},
+		dataType : "json",
+		success : function (data) {
+			console.log(data);
 		}
-		
-		if (isNaN(floor)) {
-			alert("층은 숫자만 가능합니다.");
-			return ;
-		}
-		
-		$.ajax({
-			url : "/getToiletUseInfo.do",
-			type : "post",
-			data : { floor : floor},
-			dataType : "json",
-			success : function (data) {
-				console.log(data);
-			}
-		});
 	});
+}
+
+/**
+ * 사용여부 수정
+ */
+function updateInfo(mode) {
+	var url = "";
+	var code = "";
+	var useyn = "";
+	if (mode == "toilet") {
+		url = "/updateToiletUseInfo.do";
+		code = $("#toiletCode").val();
+		useyn = $("#toiletUseyn").val();
+	} else {
+		url = "/updateMeetingRoomUseInfo.do";
+		code = $("#meetingRoomCode").val();
+		useyn = $("#meetingRoomUseyn").val();
+	}
 	
-	// 사용 여부 수정
-	$("#updateToiletUseInfoBtn").click(function () {
-		var code = $("#code").val();
-		var useyn = $("#useyn").val();
-		if (0 == code.length || 0 == useyn.length) {
-			alert("센서코드 또는 사용여부를 입력하세요.");
-			return ;
+	if (0 == code.length || 0 == useyn.length) {
+		alert("센서코드 또는 사용여부를 입력하세요.");
+		return ;
+	}
+	
+	if (isNaN(code)) {
+		alert("센서코드 숫자만 가능합니다.");
+		return ;
+	}
+	
+	if (useyn != "Y" && useyn != "N") {
+		alert("사용여부는 Y나 N만 가능합니다.");
+		return ;
+	}
+	
+	$.ajax({
+		url : url,
+		type : "post",
+		data : { code : code, useyn : useyn},
+		dataType : "json",
+		success : function (data) {
+			console.log(data);
 		}
-		
-		if (isNaN(code)) {
-			alert("센서코드 숫자만 가능합니다.");
-			return ;
-		}
-		
-		if (useyn != "Y" && useyn != "N") {
-			alert("사용여부는 Y나 N만 가능합니다.");
-			return ;
-		}
-		
-		$.ajax({
-			url : "/updateToiletUseInfo.do",
-			type : "post",
-			data : { code : code, useyn : useyn},
-			dataType : "json",
-			success : function (data) {
-				console.log(data);
-			}
-		});
 	});
-	
-});
+}
+
 </script>
 </html>

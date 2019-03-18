@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sinc.project.meetingRoomUseInfo">
+	<select id="totalMeetingRoomUseInfoList" resultType="meetingroomuseinfo" flushCache="true" useCache="true">
+		SELECT
+			SENSORCODE, FLOOR, NAME, USEYN
+		FROM
+			MEETINGROOMUSEINFO
+	</select>
+
+	<select id="meetingRoomUseInfoList" resultType="meetingroomuseinfo" flushCache="true" useCache="true">
+		SELECT
+			SENSORCODE, FLOOR, NAME, USEYN
+		FROM
+			MEETINGROOMUSEINFO
+		WHERE
+			FLOOR = #{floor}
+	</select>
+	
+	<update id="updateMeetingRoomUseInfo" parameterType="meetingroomuseinfo">
+		UPDATE
+			MEETINGROOMUSEINFO
+		SET 
+			USEYN = #{useyn}
+		WHERE
+			SENSORCODE = #{sensorcode}
+	</update>
+
+</mapper>
+
