@@ -11,7 +11,7 @@
 <h4>화장실 사용현황</h4>
 <button type="button" id="getTotalToiletUseInfoBtn" onclick="getTotalInfo('toilet');">전체 화장실 사용 현황</button><br><br>
 <hr />
-<input type="text" id="toiletfloor" />층의 <button type="button" id="getToiletUseInfoBtn"  onclick="getInfo('toilet');">화장실 사용 현황</button><br><br>
+층:<input type="text" id="toiletfloor" /> 성별:<input type="text" id="gender" />의 <button type="button" id="getToiletUseInfoBtn"  onclick="getInfo('toilet');">화장실 사용 현황</button><br><br>
 <hr />
 센서코드 : <input type="text" id="toiletCode" />
 사용여부 : <input type="text" id="toiletUseyn" />
@@ -55,9 +55,11 @@ function getTotalInfo(mode) {
 function getInfo(mode) {
 	var url = "";
 	var floor = "";
+	var gender = "";
 	if (mode == "toilet") {
 		url = "/getToiletUseInfo.do";
 		floor = $("#toiletfloor").val();
+		gender = $("#gender").val();
 	} else {
 		url = "/getMeetingRoomUseInfo.do";
 		floor = $("#meetingRoomfloor").val();
@@ -76,7 +78,7 @@ function getInfo(mode) {
 	$.ajax({
 		url : url,
 		type : "post",
-		data : { floor : floor},
+		data : { floor : floor, gender: gender},
 		dataType : "json",
 		success : function (data) {
 			console.log(data);
