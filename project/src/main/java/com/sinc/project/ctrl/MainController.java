@@ -49,7 +49,7 @@ public class MainController {
 		System.out.println("getToiletUseInfo Controller");
 		System.out.println("floor "+ floor);
 		System.out.println("jender "+ jender);
-		JSONObject result = toiletInfoService.getToiletUseInfo(floor, "F");	// 특정 층 화장실 사용정보 조회
+		JSONObject result = toiletInfoService.getToiletUseInfo(floor, jender);	// 특정 층 화장실 사용정보 조회
 		System.out.println(result);
 		return result;
 	}
