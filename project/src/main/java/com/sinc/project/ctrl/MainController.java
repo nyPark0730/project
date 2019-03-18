@@ -44,12 +44,12 @@ public class MainController {
 	 */
 	@RequestMapping(value="/getToiletUseInfo.do", method=RequestMethod.POST)
 	@ResponseBody
-	public JSONObject getToiletUseInfo (int floor, String jender) {
+	public JSONObject getToiletUseInfo (int floor, String gender) {
 		
 		System.out.println("getToiletUseInfo Controller");
 		System.out.println("floor "+ floor);
-		System.out.println("jender "+ jender);
-		JSONObject result = toiletInfoService.getToiletUseInfo(floor, jender);	// 특정 층 화장실 사용정보 조회
+		System.out.println("jender "+ gender);
+		JSONObject result = toiletInfoService.getToiletUseInfo(floor, gender);	// 특정 층 화장실 사용정보 조회
 		System.out.println(result);
 		return result;
 	}
