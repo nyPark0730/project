@@ -7,7 +7,7 @@ public interface ToiletInfoDao {
 
 	public List<Object> getTotalToiletUseInfo();
 	
-	public List<HashMap<String, Object>> getToiletUseInfo(Object obj);
+	public List<Object> getToiletUseInfo(Object obj);
 	
 	public int updateToiletUseInfo(Object obj);
 	

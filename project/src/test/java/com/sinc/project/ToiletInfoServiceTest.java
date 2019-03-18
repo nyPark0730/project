@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,7 +30,7 @@ public class ToiletInfoServiceTest {
 	  
 	  @Test
 	  public void getToiletUseInfoTest() {
-		  List<Object> list = toiletInfoService.getToiletUseInfo(9);
+		  List<Object> list = toiletInfoService.getToiletUseInfo(9, "M");
 		  assertNotNull(list);
 	  }
 	  

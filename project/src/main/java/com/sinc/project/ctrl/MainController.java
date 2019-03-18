@@ -1,11 +1,15 @@
 package com.sinc.project.ctrl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,17 +46,19 @@ public class MainController {
 	 * @param floor
 	 * @return
 	 */
-	@RequestMapping(value="/getToiletUseInfo.do", method=RequestMethod.POST)
+	
+	@RequestMapping(value="/getToiletUseInfo.do")
 	@ResponseBody
-	public JSONObject getToiletUseInfo (int floor, String gender) {
+	public List<Object> getToiletUseInfo (int floor, String gender) {
 		
 		System.out.println("getToiletUseInfo Controller");
-		System.out.println("floor "+ floor);
-		System.out.println("jender "+ gender);
-		JSONObject result = toiletInfoService.getToiletUseInfo(floor, gender);	// 특정 층 화장실 사용정보 조회
-		System.out.println(result);
-		return result;
+		System.out.println("floor : "+ floor+ ", gender : " + gender); 
+
+		
+		//JSONArray result = toiletInfoService.getToiletUseInfo(floor, gender) ;	// 특정 층 화장실 사용정보 조회
+		return toiletInfoService.getToiletUseInfo(floor, gender); 
 	}
+	
 	
 	/**
 	 * 화장실 사용여부 수정

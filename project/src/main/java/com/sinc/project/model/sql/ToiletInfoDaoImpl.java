@@ -21,7 +21,7 @@ public class ToiletInfoDaoImpl implements ToiletInfoDao {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getToiletUseInfo(Object obj) {
+	public List<Object> getToiletUseInfo(Object obj) {
 		System.out.println("ToiletInfoDaoImpl getToiletUseInfo");
 		return session.selectList("com.sinc.project.toiletUseInfo.toiletUseInfoList", obj);
 	}

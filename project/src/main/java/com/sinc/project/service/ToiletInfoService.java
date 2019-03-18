@@ -1,8 +1,9 @@
 package com.sinc.project.service;
 
+import java.util.HashMap;
 import java.util.List;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 public interface ToiletInfoService {
 
@@ -17,7 +18,7 @@ public interface ToiletInfoService {
 	 * @param floor
 	 * @return
 	 */
-	public JSONObject getToiletUseInfo(int floor, String gender);
+	public List<Object> getToiletUseInfo(int floor, String gender);
 	
 	/**
 	 * 화장실 사용여부 수정
