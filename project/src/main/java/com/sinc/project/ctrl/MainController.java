@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,11 +44,12 @@ public class MainController {
 	 */
 	@RequestMapping(value="/getToiletUseInfo.do", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Object> getToiletUseInfo (int floor) {
+	public JSONObject getToiletUseInfo (int floor, String jender) {
 		
 		System.out.println("getToiletUseInfo Controller");
 		System.out.println("floor "+ floor);
-		List<Object> result = toiletInfoService.getToiletUseInfo(floor);	// 특정 층 화장실 사용정보 조회
+		System.out.println("jender "+ jender);
+		JSONObject result = toiletInfoService.getToiletUseInfo(floor, "F");	// 특정 층 화장실 사용정보 조회
 		System.out.println(result);
 		return result;
 	}

@@ -1,5 +1,6 @@
 package com.sinc.project.model.sql;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ public class ToiletInfoDaoImpl implements ToiletInfoDao {
 	}
 
 	@Override
-	public List<Object> getToiletUseInfo(Object obj) {
+	public List<HashMap<String, Object>> getToiletUseInfo(Object obj) {
 		System.out.println("ToiletInfoDaoImpl getToiletUseInfo");
 		return session.selectList("com.sinc.project.toiletUseInfo.toiletUseInfoList", obj);
 	}

@@ -2,7 +2,7 @@ package com.sinc.project.service;
 
 import java.util.List;
 
-import com.sinc.project.model.vo.ToiletUseInfoVO;
+import org.json.JSONObject;
 
 public interface ToiletInfoService {
 
@@ -17,7 +17,7 @@ public interface ToiletInfoService {
 	 * @param floor
 	 * @return
 	 */
-	public List<Object> getToiletUseInfo(int floor);
+	public JSONObject getToiletUseInfo(int floor, String gender);
 	
 	/**
 	 * 화장실 사용여부 수정

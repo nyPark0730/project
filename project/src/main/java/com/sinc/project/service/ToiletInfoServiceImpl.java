@@ -1,10 +1,11 @@
 package com.sinc.project.service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.sinc.project.model.sql.ToiletInfoDao;
@@ -32,11 +33,15 @@ public class ToiletInfoServiceImpl implements ToiletInfoService {
 	 * @return
 	 */
 	@Override
-	public List<Object> getToiletUseInfo(int floor) {
+	public JSONObject getToiletUseInfo(int floor, String gender) {
 		
 		ToiletUseInfoVO toiletUseInfo = new ToiletUseInfoVO();
-		toiletUseInfo.setFloor(floor);	// 층
-		return toiletInfoDao.getToiletUseInfo(toiletUseInfo);
+		toiletUseInfo.setFloor(floor);		// 층
+		toiletUseInfo.setGender(gender);	// 성별
+		
+		JSONObject jObj = new JSONObject();
+		jObj.put("data", toiletInfoDao.getToiletUseInfo(toiletUseInfo));
+		return jObj;
 	}
 
 	/**

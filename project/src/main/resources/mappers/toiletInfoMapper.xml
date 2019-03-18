@@ -18,6 +18,7 @@
 			TOILETUSEINFO
 		WHERE
 			FLOOR = #{floor}
+			AND GENDER = #{gender}
 	</select>
 	
 	<update id="updateToiletUseInfo" parameterType="toiletuseinfo">
