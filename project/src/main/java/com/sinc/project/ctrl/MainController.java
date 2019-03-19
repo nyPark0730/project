@@ -149,14 +149,12 @@ public class MainController {
 	 */
 	@RequestMapping(value="/putTokenInfo.do", method=RequestMethod.POST)
 	@ResponseBody
-	public int mergeToken (String memberseq, String token) {
+	public int mergeToken (String Memberseq, String Token) {
 		
 		System.out.println("mergeToken Controller");
-		System.out.println("memberSeq "+ memberseq);
-		System.out.println("token "+ token);
+		System.out.println("memberseq "+ Memberseq);
+		System.out.println("token "+ Token);
 		
-		return msailService.mergeToken(memberseq, token);		// 회의실 사용정보 수정
+		return msailService.mergeToken(Memberseq, Token);		// 회의실 사용정보 수정
 	}
-	
-	
 }
