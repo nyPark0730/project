@@ -45,7 +45,7 @@ public class MainController {
 	 * @param gender
 	 * @return
 	 */
-	@RequestMapping(value="/getTotalToiletUseInfo.do", method=RequestMethod.POST)
+	@RequestMapping(value="/getToiletUseInfoByGender.do", method=RequestMethod.POST)
 	@ResponseBody
 	public List<Object> getToiletUseInfoByGender (String gender) {
 		
