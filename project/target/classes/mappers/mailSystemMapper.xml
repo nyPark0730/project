@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sinc.project.mailSystem">
+	<insert id="addKeyword" parameterType="keywordinfo">
+		INSERT INTO MEMBERKEYWORD
+		VALUES(#{memberseq}, #{keyword})
+	</insert>
+	
+	<select id="memberKeywordList" resultType="keywordinfo" flushCache="true" useCache="true">
+		SELECT
+			MEMBERSEQ, KEYWORD
+		FROM
+			MEMBERKEYWORD
+		WHERE
+			MEMBERSEQ = #{memberseq}
+	</select>
+	
+	<insert id="addMail" parameterType="mailinfo">
+		INSERT INTO MAIL
+		VALUES(MAILSEQSEQ.NEXTVAL, #{smode}, #{title}, #{contents}, #{sender}, #{recipient}, SYSDATE)
+	</insert>
+	
+	<update id="mergeToken" parameterType="tokeninfo">
+		MERGE INTO MEMBERTOKEN  
+		USING DUAL 
+		ON (MEMBERSEQ = #{memberseq})
+		WHEN MATCHED THEN     
+			UPDATE SET     
+		    	TOKEN = #{token}   
+		WHEN NOT MATCHED THEN
+			INSERT (MEMBERSEQ, TOKEN)
+			VALUES(#{memberseq}, #{token})
+	</update>
+</mapper>
+

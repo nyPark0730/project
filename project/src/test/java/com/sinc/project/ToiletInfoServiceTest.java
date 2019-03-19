@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.sinc.project.model.vo.ToiletUseInfoVO;
 import com.sinc.project.service.ToiletInfoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,6 +29,12 @@ public class ToiletInfoServiceTest {
 		  assertNotNull(list);
 	  }
 	  
+	  @Test
+	  public void getToiletUseInfoByGenderTest() {
+		  List<Object> list = toiletInfoService.getToiletUseInfoByGender("F");
+		  assertNotNull(list);
+	  }
+
 	  @Test
 	  public void getToiletUseInfoTest() {
 		  List<Object> list = toiletInfoService.getToiletUseInfo(9, "M");

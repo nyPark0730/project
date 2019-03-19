@@ -1,9 +1,6 @@
 package com.sinc.project.service;
 
-import java.util.HashMap;
 import java.util.List;
-
-import org.json.JSONArray;
 
 public interface ToiletInfoService {
 
@@ -12,6 +9,13 @@ public interface ToiletInfoService {
 	 * @return
 	 */
 	public List<Object> getTotalToiletUseInfo();
+	
+	/**
+	 * 특정 성별 화장실 사용여부 조회
+	 * @param gender
+	 * @return
+	 */
+	public List<Object> getToiletUseInfoByGender(String gender);
 	
 	/**
 	 * 특정 층의 화장실 사용여부 조회

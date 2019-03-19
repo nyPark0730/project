@@ -1,6 +1,5 @@
 package com.sinc.project.model.sql;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,6 +18,13 @@ public class ToiletInfoDaoImpl implements ToiletInfoDao {
 		System.out.println("ToiletInfoDaoImpl getTotalToiletUseInfo");
 		return session.selectList("com.sinc.project.toiletUseInfo.totalToiletUseInfoList");
 	}
+	
+
+	@Override
+	public List<Object> getToiletUseInfoByGender(Object obj) {
+		System.out.println("ToiletInfoDaoImpl getToiletUseInfoByGender");
+		return session.selectList("com.sinc.project.toiletUseInfo.toiletUseInfoByGenderList", obj);
+	}
 
 	@Override
 	public List<Object> getToiletUseInfo(Object obj) {
@@ -32,4 +38,5 @@ public class ToiletInfoDaoImpl implements ToiletInfoDao {
 		session.update("com.sinc.project.toiletUseInfo.updateToiletUseInfo", obj);
 		return 0;
 	}
+
 }

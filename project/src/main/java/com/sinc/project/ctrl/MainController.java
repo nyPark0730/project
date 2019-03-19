@@ -1,19 +1,15 @@
 package com.sinc.project.ctrl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sinc.project.service.MailService;
 import com.sinc.project.service.MeetingRoomInfoService;
 import com.sinc.project.service.ToiletInfoService;
 
@@ -25,6 +21,9 @@ public class MainController {
 
 	@Resource(name="meetingRoomInfoService")
 	private MeetingRoomInfoService meetingRoomInfoService;
+	
+	@Resource(name="mailService")
+	private MailService msailService;
 	
 	/**
 	 * 전체 화장실 사용여부 조회
@@ -42,8 +41,26 @@ public class MainController {
 	}
 	
 	/**
+	 * 특정 성별 화장실 사용여부 조회
+	 * @param gender
+	 * @return
+	 */
+	@RequestMapping(value="/getTotalToiletUseInfo.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Object> getToiletUseInfoByGender (String gender) {
+		
+		System.out.println("getToiletUseInfoByGender Controller");
+		System.out.println("gender : " + gender); 
+		List<Object> result = toiletInfoService.getToiletUseInfoByGender(gender);	// 화장실 사용정보 전체 조회
+  		System.out.println(result);
+  		
+		return result;
+	}
+	
+	/**
 	 * 특정 층의 화장실 사용여부 조회
 	 * @param floor
+	 * @param gender
 	 * @return
 	 */
 	
@@ -123,4 +140,23 @@ public class MainController {
 		
 		return meetingRoomInfoService.updateMeetingRoomUseInfo(code, useyn);			// 회의실 사용정보 수정
 	}
+	
+	/**
+	 * 멤버의 토큰 정보 입력
+	 * @param memberSeq
+	 * @param token
+	 * @return
+	 */
+	@RequestMapping(value="/putTokenInfo.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int mergeToken (String memberseq, String token) {
+		
+		System.out.println("mergeToken Controller");
+		System.out.println("memberSeq "+ memberseq);
+		System.out.println("token "+ token);
+		
+		return msailService.mergeToken(memberseq, token);		// 회의실 사용정보 수정
+	}
+	
+	
 }

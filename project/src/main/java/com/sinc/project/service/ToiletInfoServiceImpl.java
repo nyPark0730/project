@@ -1,11 +1,9 @@
 package com.sinc.project.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.json.JSONArray;
 import org.springframework.stereotype.Service;
 
 import com.sinc.project.model.sql.ToiletInfoDao;
@@ -27,6 +25,14 @@ public class ToiletInfoServiceImpl implements ToiletInfoService {
 		return toiletInfoDao.getTotalToiletUseInfo();
 	}
 
+	@Override
+	public List<Object> getToiletUseInfoByGender(String gender) {
+		System.out.println("ToiletInfoServiceImpl getToiletUseInfoByGender");
+		ToiletUseInfoVO toiletUseInfo = new ToiletUseInfoVO();
+		toiletUseInfo.setGender(gender);	// 성별
+		return toiletInfoDao.getToiletUseInfoByGender(toiletUseInfo);
+	} 
+	
 	/**
 	 * 특정 층의 화장실 사용여부 조회
 	 * @param floor
@@ -64,5 +70,6 @@ public class ToiletInfoServiceImpl implements ToiletInfoService {
 		}
 		
 		return toiletInfoDao.updateToiletUseInfo(toiletUseInfo);
-	} 
+	}
+
 }
