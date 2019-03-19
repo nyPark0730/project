@@ -1,26 +1,16 @@
 package com.sinc.project.ctrl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sinc.project.model.vo.MailVO;
-import com.sinc.project.model.vo.TokenVO;
+import com.sinc.project.model.vo.MemberVO;
 import com.sinc.project.service.MailService;
 import com.sinc.project.service.MeetingRoomInfoService;
 import com.sinc.project.service.ToiletInfoService;
@@ -87,7 +77,6 @@ public class MainController {
 		//JSONArray result = toiletInfoService.getToiletUseInfo(floor, gender) ;	// 특정 층 화장실 사용정보 조회
 		return toiletInfoService.getToiletUseInfo(floor, gender); 
 	}
-	
 	
 	/**
 	 * 화장실 사용여부 수정
@@ -197,12 +186,12 @@ public class MainController {
 		recipientMail.setTitle(title);
 		recipientMail.setContents(contents);
 		recipientMail.setSmode("RECEIVE");
-		mailService.addMail(recipientMail);	// 받는 메일 정보 입력
+		int mailSeq = mailService.addMail(recipientMail);	// 받는 메일 정보 입력
 		
-		// 키워드 비교
-		mailService.compareKeyword(recipient, title);
-		
-		mailService.sendFCM(recipient);
+		if (mailService.compareKeyword(recipient, title)) {	// 키워드와 메일 제목을 비교한 후 일치하는 경우 알람
+			MemberVO senderInfo = (MemberVO)mailService.getMemberInfo(sender);
+			mailService.sendFCM(senderInfo, recipient, title, mailSeq);
+		}
 		return 0;	
 	}
 }

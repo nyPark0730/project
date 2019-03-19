@@ -15,4 +15,8 @@ public interface MailDao {
 	public int mergeToken(Object obj);
 	
 	public TokenVO getTokenInfo(Object obj);
+	
+	public Object getMemberInfo(Object obj);
+	
+	public Object getMail(Object obj);
 }

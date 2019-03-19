@@ -21,6 +21,9 @@
 	<insert id="addMail" parameterType="mailinfo">
 		INSERT INTO MAIL
 		VALUES(MAILSEQSEQ.NEXTVAL, #{smode}, #{title}, #{contents}, #{sender}, #{recipient}, SYSDATE)
+		<selectKey keyProperty="mailseq" resultType="int" order="AFTER">
+			SELECT MAILSEQSEQ.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
 	
 	<update id="mergeToken" parameterType="tokeninfo">
@@ -42,6 +45,27 @@
 			MEMBERTOKEN
 		WHERE
 			MEMBERSEQ = #{memberseq}
+	</select>
+	
+	<select id="getMemberInfo" resultType="memberinfo" flushCache="true" useCache="true">
+		SELECT
+			MEMBERSEQ, MEMBERNAME, TEAM
+		FROM
+			MEMBER
+		WHERE
+			MEMBERSEQ = #{memberseq}
+	</select>
+
+	<select id="getMail" resultType="hashMap" parameterType="mailinfo" flushCache="true" useCache="true">
+		SELECT
+			MAILSEQ, TITLE, CONTENTS, SENDER, RECIPIENT, MAILDATE, M1.MEMBERNAME AS SENDERNAME, M2.MEMBERNAME AS RECIPIENTNAME
+		FROM
+			MAIL M 
+			INNER JOIN MEMBER M1 ON (M.SENDER = M1.MEMBERSEQ)
+			INNER JOIN MEMBER M2 ON (M.RECIPIENT = M2.MEMBERSEQ)
+		WHERE
+			MAILSEQ = #{mailseq}
+			AND SMODE = 'RECEIVE'
 	</select>
 </mapper>
 

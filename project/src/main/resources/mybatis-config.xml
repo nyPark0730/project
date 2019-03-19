@@ -9,5 +9,6 @@
 		<typeAlias type="com.sinc.project.model.vo.KeywordVO" alias="keywordinfo"/>
 		<typeAlias type="com.sinc.project.model.vo.MailVO" alias="mailinfo"/>
 		<typeAlias type="com.sinc.project.model.vo.TokenVO" alias="tokeninfo"/>
+		<typeAlias type="com.sinc.project.model.vo.MemberVO" alias="memberinfo"/>
 	</typeAliases>
 </configuration>

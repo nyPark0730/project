@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.sinc.project.model.vo.MailVO;
 import com.sinc.project.model.vo.TokenVO;
 
 @Repository("mailDao")
@@ -30,7 +31,8 @@ public class MailDaoImpl implements MailDao {
 	@Override
 	public int addMail(Object obj) {
 		System.out.println("MailDaoImpl addMail");
-		return session.insert("com.sinc.project.mailSystem.addMail", obj);
+		session.insert("com.sinc.project.mailSystem.addMail", obj);
+		return ((MailVO)obj).getMailseq();
 	}
 
 	@Override
@@ -42,5 +44,17 @@ public class MailDaoImpl implements MailDao {
 	public TokenVO getTokenInfo(Object obj) {
 		System.out.println("MailDaoImpl getTokenInfo");
 		return session.selectOne("com.sinc.project.mailSystem.memberTokenList", obj);
+	}
+
+	@Override
+	public Object getMemberInfo(Object obj) {
+		System.out.println("MailDaoImpl getMemberInfo");
+		return session.selectOne("com.sinc.project.mailSystem.getMemberInfo", obj);
+	}
+
+	@Override
+	public Object getMail(Object obj) {
+		System.out.println("MailDaoImpl getMail");
+		return session.selectOne("com.sinc.project.mailSystem.getMail", obj);
 	}
 }

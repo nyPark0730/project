@@ -1,5 +1,7 @@
 package com.sinc.project;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -8,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sinc.project.model.vo.MailVO;
+import com.sinc.project.model.vo.MemberVO;
 import com.sinc.project.model.vo.TokenVO;
 import com.sinc.project.service.MailService;
 
@@ -38,7 +41,6 @@ public class MailServiceTest {
 		senderMail.setTitle("물류 프로젝트 테스트 결과 공유드립니다.");
 		mailService.addMail(senderMail);
 		
-		
 		MailVO recipientMail = new MailVO(); 
 		recipientMail.setContents("안뇽~~~");
 		recipientMail.setRecipient("p90jx1"); 
@@ -51,7 +53,7 @@ public class MailServiceTest {
 	
 	@Test
 	public void mergeTokenTest() {
-		mailService.mergeToken("p90jxi", "testing");
+		mailService.mergeToken("p90jxi", "e2I-qtZ-NZo:APA91bGpRpZmN1AHrJ7jrDLF715hDxbW4EcNaS1vS2zv5gU7MctFsDCy7w9ga-c24_cn-9XUK_Q3DrP3lFTFhk9O_RipkAOcjQd9Au6RDTsYJAID-1TgjLQrmmDlJwz69s6lbwfKKQWz");
 	}
 		
 	@Test
@@ -61,11 +63,30 @@ public class MailServiceTest {
 	
 	@Test
 	public void sendFCMTest() {
-		mailService.sendFCM("p90jxi");
+		
+		MemberVO senderInfo = new MemberVO();
+		senderInfo.setMembername("박나영");
+		senderInfo.setTeam("에브리데이");
+		String recipient = "p90jxi";
+		String title = "물류 프로젝트 테스트 결과 공유드립니다.";
+		int mailSeq = 45;
+		mailService.sendFCM(senderInfo, recipient, title, mailSeq);
 	}
 	
 	@Test
 	public void compareKeywordTest() {
-		mailService.compareKeyword("p90jxi", "물류");
+		System.out.println(mailService.compareKeyword("p90jxi", "물류 프로젝트 테스트 결과 공유드립니다.")) ;
+	}
+	
+	@Test
+	public void getMemberInfoTest() {
+		System.out.println(mailService.getMemberInfo("p90jx1")) ;
+	}
+	
+	@Test
+	public void getMailTest() {
+		HashMap<String, Object> mailInfo = (HashMap<String, Object>) mailService.getMail(25);
+		System.out.println(mailInfo.get("SENDERNAME"));
+		System.out.println(mailInfo);
 	}
 }

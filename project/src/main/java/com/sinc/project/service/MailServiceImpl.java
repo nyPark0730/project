@@ -9,14 +9,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.ognl.Token;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.sinc.project.model.sql.MailDao;
 import com.sinc.project.model.vo.KeywordVO;
 import com.sinc.project.model.vo.MailVO;
+import com.sinc.project.model.vo.MemberVO;
 import com.sinc.project.model.vo.TokenVO;
 
 @Service("mailService")
@@ -74,26 +73,25 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public void sendFCM(String recipient) {
+	public void sendFCM(MemberVO senderInfo, String recipient, String title, int mailSeq) {
 		TokenVO memberTokenVo = getTokenInfo(recipient);
 		String memberSeq = memberTokenVo.getMemberseq();
 		String memberToken = memberTokenVo.getToken();
          
 		JSONObject pushJobj = new JSONObject();
-		JSONObject jObj = new JSONObject();
-		jObj.put("title", "mailTestTitle");
-		jObj.put("body", "mailTestContents");
-		pushJobj.put("notification", jObj);
+		JSONObject jObjNotification = new JSONObject();
+		jObjNotification.put("title", senderInfo.getMembername() + "담당 (" + senderInfo.getTeam() + "팀)");
+		jObjNotification.put("body", title);
+		
+		JSONObject jObjData = new JSONObject();
+		jObjData.put("mailseq", mailSeq);
+		pushJobj.put("notification", jObjNotification);
 		pushJobj.put("to", memberToken);
-
+		pushJobj.put("data", jObjData);
+		
 		String pushInfo = pushJobj.toString();
 		System.out.println(pushInfo);
-		// 이렇게 보내면 주제를 ALL로 지정해놓은 모든 사람들한테 알림을 날려준다.
-		//String input = "{\"notification\" : {\"title\" : \"여기다 제목 넣기 \", \"body\" : \"여기다 내용 넣기\"}, \"to\":\"/topics/ALL\"}";
-         
-		// 이걸로 보내면 특정 토큰을 가지고있는 어플에만 알림을 날려준다  위에 둘중에 한개 골라서 날려주자
-		String input = "{\"notification\" : {\"title\" : \" aa \", \"body\" : \"ww\"}, \"to\":\""+memberToken+"\"}";
-		System.out.println(input);
+		
 		try {
 			final String apiKey = "AIzaSyDZ1-PtQzXbAF4Gysyivf684CcGRGIsqbI";
 			URL url = new URL("https://fcm.googleapis.com/fcm/send");
@@ -102,8 +100,6 @@ public class MailServiceImpl implements MailService {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Authorization", "key=" + apiKey);
-
-
 			conn.setDoOutput(true);
 			
 			OutputStream os = conn.getOutputStream();
@@ -114,7 +110,7 @@ public class MailServiceImpl implements MailService {
 	        // 서버에서 날려서 한글 깨지는 사람은 아래처럼  UTF-8로 인코딩해서 날려주자
 	        int responseCode = conn.getResponseCode();
 	        System.out.println("\nSending 'POST' request to URL : " + url);
-	        System.out.println("Post parameters : " + input);
+	        System.out.println("Post parameters : " + pushInfo);
 	        System.out.println("Response Code : " + responseCode);
 	         
 	        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -136,10 +132,25 @@ public class MailServiceImpl implements MailService {
 		boolean flag = false;
 		List<Object> keywordList = getKeyword(recipient);
 		System.out.println("keywordList" + keywordList);
-		
-		for (Object keyword : keywordList) {
-			
+		System.out.println("title "+title);
+		for (Object keywordvo : keywordList) {
+			String keyword = ((KeywordVO)keywordvo).getKeyword();
+			if (title.contains(keyword)) {
+				flag = true;
+			}
 		}
 		return flag;
+	}
+
+	@Override
+	public Object getMemberInfo(String sender) {
+		return mailDao.getMemberInfo(sender);
+	}
+
+	@Override
+	public Object getMail(int mailseq) {
+		MailVO mailVo = new MailVO();
+		mailVo.setMailseq(mailseq);
+		return mailDao.getMail(mailVo);
 	}
 }
