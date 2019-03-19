@@ -1,14 +1,26 @@
 package com.sinc.project.ctrl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sinc.project.model.vo.MailVO;
+import com.sinc.project.model.vo.TokenVO;
 import com.sinc.project.service.MailService;
 import com.sinc.project.service.MeetingRoomInfoService;
 import com.sinc.project.service.ToiletInfoService;
@@ -23,7 +35,7 @@ public class MainController {
 	private MeetingRoomInfoService meetingRoomInfoService;
 	
 	@Resource(name="mailService")
-	private MailService msailService;
+	private MailService mailService;
 	
 	/**
 	 * 전체 화장실 사용여부 조회
@@ -155,6 +167,39 @@ public class MainController {
 		System.out.println("memberseq "+ Memberseq);
 		System.out.println("token "+ Token);
 		
-		return msailService.mergeToken(Memberseq, Token);		// 회의실 사용정보 수정
+		return mailService.mergeToken(Memberseq, Token);	// 멤버의 토큰 정보 입력
+	}
+	
+	/**
+	 * 메일 보내기
+	 * @param sender
+	 * @param recipient
+	 * @param title
+	 * @param contents
+	 * @return
+	 */
+	@RequestMapping(value="/sendMail.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int sendMail (String sender, String recipient, String title, String contents) {
+		System.out.println("mergeToken Controller");
+		
+		MailVO senderMail = new MailVO();
+		senderMail.setSender(sender);
+		senderMail.setRecipient(recipient);
+		senderMail.setTitle(title);
+		senderMail.setContents(contents);
+		senderMail.setSmode("SEND");
+		mailService.addMail(senderMail);	// 보내는 메일 정보 입력
+		
+		MailVO recipientMail = new MailVO();
+		recipientMail.setSender(recipient);
+		recipientMail.setRecipient(sender);
+		recipientMail.setTitle(title);
+		recipientMail.setContents(contents);
+		recipientMail.setSmode("RECEIVE");
+		mailService.addMail(recipientMail);	// 받는 메일 정보 입력
+		
+		mailService.sendFCM(recipient);
+		return 0;	
 	}
 }

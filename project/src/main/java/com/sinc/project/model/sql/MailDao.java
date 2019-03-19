@@ -2,7 +2,7 @@ package com.sinc.project.model.sql;
 
 import java.util.List;
 
-import com.sinc.project.model.vo.MailVO;
+import com.sinc.project.model.vo.TokenVO;
 
 public interface MailDao {
 
@@ -13,4 +13,6 @@ public interface MailDao {
 	public int addMail(Object obj);
 	
 	public int mergeToken(Object obj);
+	
+	public TokenVO getTokenInfo(Object obj);
 }

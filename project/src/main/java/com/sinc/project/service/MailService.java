@@ -3,6 +3,7 @@ package com.sinc.project.service;
 import java.util.List;
 
 import com.sinc.project.model.vo.MailVO;
+import com.sinc.project.model.vo.TokenVO;
 
 public interface MailService {
 
@@ -29,4 +30,8 @@ public interface MailService {
 	 * 멤버별 토큰 추가/수정
 	 */
 	public int mergeToken(String memberSeq, String token);
+	
+	public TokenVO getTokenInfo(String memberSeq);
+	
+	public void sendFCM(String recipient);
 }

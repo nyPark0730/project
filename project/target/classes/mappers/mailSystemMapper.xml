@@ -34,5 +34,14 @@
 			INSERT (MEMBERSEQ, TOKEN)
 			VALUES(#{memberseq}, #{token})
 	</update>
+	
+	<select id="memberTokenList" resultType="tokeninfo" flushCache="true" useCache="true">
+		SELECT
+			MEMBERSEQ, TOKEN
+		FROM
+			MEMBERTOKEN
+		WHERE
+			MEMBERSEQ = #{memberseq}
+	</select>
 </mapper>
 

@@ -1,20 +1,15 @@
 package com.sinc.project;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.util.List;
-
 import javax.annotation.Resource;
 
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sinc.project.model.vo.MailVO;
+import com.sinc.project.model.vo.TokenVO;
 import com.sinc.project.service.MailService;
-import com.sinc.project.service.ToiletInfoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
@@ -34,7 +29,7 @@ public class MailServiceTest {
 	}
 	
 	@Test
-	public void addMail() {
+	public void addMailTest() {
 		MailVO senderMail = new MailVO();
 		senderMail.setContents("안뇽~~~");
 		senderMail.setRecipient("p90jxi");
@@ -55,9 +50,17 @@ public class MailServiceTest {
 	}
 	
 	@Test
-	public void mergeToken() {
+	public void mergeTokenTest() {
 		mailService.mergeToken("p90jxi", "testing");
 	}
 		
-	  
+	@Test
+	public void getTokenInfoTest() {
+		TokenVO mamberToken = mailService.getTokenInfo("p90jxi");
+	}
+	
+	@Test
+	public void sendFCMTest() {
+		mailService.sendFCM("p90jxi");
+	}
 }
