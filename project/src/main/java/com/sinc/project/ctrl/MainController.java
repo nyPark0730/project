@@ -199,6 +199,9 @@ public class MainController {
 		recipientMail.setSmode("RECEIVE");
 		mailService.addMail(recipientMail);	// 받는 메일 정보 입력
 		
+		// 키워드 비교
+		mailService.compareKeyword(recipient, title);
+		
 		mailService.sendFCM(recipient);
 		return 0;	
 	}

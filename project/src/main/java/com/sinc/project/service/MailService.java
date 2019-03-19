@@ -34,4 +34,6 @@ public interface MailService {
 	public TokenVO getTokenInfo(String memberSeq);
 	
 	public void sendFCM(String recipient);
+	
+	public boolean compareKeyword(String recipient, String title);
 }

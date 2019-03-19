@@ -83,34 +83,38 @@ public class MailServiceImpl implements MailService {
 		JSONObject jObj = new JSONObject();
 		jObj.put("title", "mailTestTitle");
 		jObj.put("body", "mailTestContents");
-		jObj.put("to", "mailTestContents");
 		pushJobj.put("notification", jObj);
+		pushJobj.put("to", memberToken);
 
 		String pushInfo = pushJobj.toString();
+		System.out.println(pushInfo);
 		// 이렇게 보내면 주제를 ALL로 지정해놓은 모든 사람들한테 알림을 날려준다.
 		//String input = "{\"notification\" : {\"title\" : \"여기다 제목 넣기 \", \"body\" : \"여기다 내용 넣기\"}, \"to\":\"/topics/ALL\"}";
          
 		// 이걸로 보내면 특정 토큰을 가지고있는 어플에만 알림을 날려준다  위에 둘중에 한개 골라서 날려주자
-		//String input = "{\"notification\" : {\"title\" : \" 여기다 제목넣기 \", \"body\" : \"여기다 내용 넣기\"}, \"to\":\" 여기가 받을 사람 토큰  \"}";
+		String input = "{\"notification\" : {\"title\" : \" aa \", \"body\" : \"ww\"}, \"to\":\""+memberToken+"\"}";
+		System.out.println(input);
 		try {
-			final String apiKey = "AIzaSyAziY1f60XL6rfuDb-azz2-D4TRH-LhZm0";
+			final String apiKey = "AIzaSyDZ1-PtQzXbAF4Gysyivf684CcGRGIsqbI";
 			URL url = new URL("https://fcm.googleapis.com/fcm/send");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Content-Type", "application/json");
-			conn.setRequestProperty("Authorization", "key=" + "AIzaSyAziY1f60XL6rfuDb-azz2-D4TRH-LhZm0");
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Authorization", "key=" + apiKey);
+
+
 			conn.setDoOutput(true);
 			
 			OutputStream os = conn.getOutputStream();
-			os.write(pushInfo.getBytes("UTF-8"));
+			os.write(pushJobj.toString().getBytes("UTF-8"));
 	        os.flush();
 	        os.close();
 	        
 	        // 서버에서 날려서 한글 깨지는 사람은 아래처럼  UTF-8로 인코딩해서 날려주자
 	        int responseCode = conn.getResponseCode();
 	        System.out.println("\nSending 'POST' request to URL : " + url);
-	        System.out.println("Post parameters : " + pushInfo);
+	        System.out.println("Post parameters : " + input);
 	        System.out.println("Response Code : " + responseCode);
 	         
 	        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -126,6 +130,16 @@ public class MailServiceImpl implements MailService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	} 
+	
+	public boolean compareKeyword(String recipient, String title) {
+		boolean flag = false;
+		List<Object> keywordList = getKeyword(recipient);
+		System.out.println("keywordList" + keywordList);
+		
+		for (Object keyword : keywordList) {
+			
+		}
+		return flag;
+	}
 }

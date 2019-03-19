@@ -63,4 +63,9 @@ public class MailServiceTest {
 	public void sendFCMTest() {
 		mailService.sendFCM("p90jxi");
 	}
+	
+	@Test
+	public void compareKeywordTest() {
+		mailService.compareKeyword("p90jxi", "물류");
+	}
 }
