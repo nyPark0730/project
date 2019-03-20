@@ -10,6 +10,8 @@ public interface MailDao {
 	
 	public List<Object> getKeyword(Object obj);
 	
+	public int deleteKeyword(Object obj);
+	
 	public int addMail(Object obj);
 	
 	public int mergeToken(Object obj);

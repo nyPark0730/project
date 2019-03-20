@@ -203,4 +203,38 @@ public class MainController {
 		}
 		return 0;	
 	}
+	
+	/**
+	 * 키워드 추가
+	 * @param memberseq
+	 * @param keyword
+	 * @return
+	 */
+	@RequestMapping(value="/addKeyword.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int addKeyword (String memberseq, String keyword) {
+		
+		System.out.println("addKeyword Controller");
+		System.out.println("memberseq "+ memberseq);
+		System.out.println("keyword "+ keyword);
+		
+		return mailService.addKeyword(memberseq, keyword);	// 키워드 추가
+	}
+	
+	/**
+	 * 키워드 삭제 후 조회
+	 * @param memberseq
+	 * @param keyword
+	 * @return
+	 */
+	@RequestMapping(value="/deleteKeywordAndGet.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Object> deleteKeywordAndGet (String memberseq, String keyword) {
+		
+		System.out.println("deleteKeywordAndGet Controller");
+		System.out.println("memberseq "+ memberseq);
+		System.out.println("keyword "+ keyword);
+		
+		return mailService.deleteKeyword(memberseq, keyword);	// 키워드 삭제 후 조회
+	}
 }

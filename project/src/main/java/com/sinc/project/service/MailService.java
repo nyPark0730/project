@@ -22,6 +22,14 @@ public interface MailService {
 	public List<Object> getKeyword(String memberSeq);
 	
 	/**
+	 * 키워드 삭제
+	 * @param memberSeq
+	 * @param keyword
+	 * @return
+	 */
+	public List<Object> deleteKeyword(String memberSeq, String keyword);
+	
+	/**
 	 * 메일 추가
 	 * @return
 	 */

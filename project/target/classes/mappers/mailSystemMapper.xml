@@ -18,6 +18,14 @@
 			MEMBERSEQ = #{memberseq}
 	</select>
 	
+	<delete id="deleteKeyword" parameterType="keywordinfo">
+		DELETE FROM
+			MEMBERKEYWORD
+		WHERE 
+			MEMBERSEQ = #{memberseq}
+			AND KEYWORD = #{keyword}
+	</delete>
+
 	<insert id="addMail" parameterType="mailinfo">
 		INSERT INTO MAIL
 		VALUES(MAILSEQSEQ.NEXTVAL, #{smode}, #{title}, #{contents}, #{sender}, #{recipient}, SYSDATE)

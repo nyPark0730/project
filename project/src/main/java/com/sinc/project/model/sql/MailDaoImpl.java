@@ -29,6 +29,10 @@ public class MailDaoImpl implements MailDao {
 	}
 
 	@Override
+	public int deleteKeyword(Object obj) {
+		return session.delete("com.sinc.project.mailSystem.deleteKeyword", obj);
+	}
+	@Override
 	public int addMail(Object obj) {
 		System.out.println("MailDaoImpl addMail");
 		session.insert("com.sinc.project.mailSystem.addMail", obj);
@@ -57,4 +61,5 @@ public class MailDaoImpl implements MailDao {
 		System.out.println("MailDaoImpl getMail");
 		return session.selectOne("com.sinc.project.mailSystem.getMail", obj);
 	}
+
 }

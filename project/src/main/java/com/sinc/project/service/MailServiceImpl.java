@@ -44,6 +44,18 @@ public class MailServiceImpl implements MailService {
 		keywordVo.setMemberseq(memberSeq);
 		return mailDao.getKeyword(keywordVo);
 	}
+	
+	/**
+	 * 키워드 삭제 후 조회
+	 */
+	@Override
+	public List<Object> deleteKeyword(String memberSeq, String keyword) {
+		KeywordVO keywordVo = new KeywordVO();
+		keywordVo.setMemberseq(memberSeq);
+		keywordVo.setKeyword(keyword);
+		mailDao.deleteKeyword(keywordVo);
+		return getKeyword(memberSeq);
+	}
 
 	/**
 	 * 메일 INSERT
@@ -157,4 +169,5 @@ public class MailServiceImpl implements MailService {
 		mailVo.setMailseq(mailseq);
 		return mailDao.getMail(mailVo);
 	}
+
 }

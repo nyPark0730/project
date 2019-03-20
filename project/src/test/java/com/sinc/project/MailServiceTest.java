@@ -32,6 +32,11 @@ public class MailServiceTest {
 	}
 	
 	@Test
+	public void deleteKeywordTest() {
+		mailService.deleteKeyword("p90jxi", "물류");
+	}
+	
+	@Test
 	public void addMailTest() {
 		MailVO senderMail = new MailVO();
 		senderMail.setContents("안뇽~~~");
