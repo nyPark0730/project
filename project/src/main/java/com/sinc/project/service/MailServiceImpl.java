@@ -49,12 +49,11 @@ public class MailServiceImpl implements MailService {
 	 * 키워드 삭제 후 조회
 	 */
 	@Override
-	public List<Object> deleteKeyword(String memberSeq, String keyword) {
+	public int deleteKeyword(String memberSeq, String keyword) {
 		KeywordVO keywordVo = new KeywordVO();
 		keywordVo.setMemberseq(memberSeq);
 		keywordVo.setKeyword(keyword);
-		mailDao.deleteKeyword(keywordVo);
-		return getKeyword(memberSeq);
+		return mailDao.deleteKeyword(keywordVo);
 	}
 
 	/**
@@ -97,12 +96,12 @@ public class MailServiceImpl implements MailService {
 		
 		JSONObject jObjData = new JSONObject();
 		jObjData.put("mailseq", mailSeq);
-		jObjData.put("title", mailSeq + "/" + senderInfo.getMembername() + "담당 (" + senderInfo.getTeam() + "팀)");
+		jObjData.put("title", senderInfo.getMembername() + " 담당 (" + senderInfo.getTeam() + "팀)");
 		jObjData.put("body", title);
-		jObjData.put("clickAction", "MAIL_DETAIL_ACTIVITY");
+		jObjData.put("clickAction", "MAILDETAILACTIVITY");
 		pushJobj.put("notification", jObjNotification);
 		pushJobj.put("to", memberToken);
-		pushJobj.put("click_action", "MAIL_DETAIL_ACTIVITY");
+		pushJobj.put("click_action", "MAILDETAILACTIVITY");
 		pushJobj.put("data", jObjData);
 		
 		String pushInfo = pushJobj.toString();

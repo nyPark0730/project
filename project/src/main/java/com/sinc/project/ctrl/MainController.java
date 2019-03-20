@@ -205,6 +205,21 @@ public class MainController {
 	}
 	
 	/**
+	 * 키워드 조회
+	 * @param memberseq
+	 * @return
+	 */
+	@RequestMapping(value="/getKeyword.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Object> getKeyword (String memberseq) {
+		
+		System.out.println("getKeyword Controller");
+		System.out.println("memberseq "+ memberseq);
+		
+		return mailService.getKeyword(memberseq);	// 키워드 조회
+	}
+	
+	/**
 	 * 키워드 추가
 	 * @param memberseq
 	 * @param keyword
@@ -229,7 +244,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/deleteKeywordAndGet.do", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Object> deleteKeywordAndGet (String memberseq, String keyword) {
+	public int deleteKeywordAndGet (String memberseq, String keyword) {
 		
 		System.out.println("deleteKeywordAndGet Controller");
 		System.out.println("memberseq "+ memberseq);
