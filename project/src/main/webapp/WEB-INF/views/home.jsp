@@ -26,27 +26,9 @@
 사용여부 : <input type="text" id="meetingRoomUseyn" />
 <button type="button" id="updateMeetingRoomUseInfoBtn" onClick="updateInfo('meetingRoom');">회의실 사용여부 수정</button><br><br>
 <hr>
-<h4>메일 보내기</h4>
-보내는사람 사번 : <input type="text" id="sender"/><br><br>
-받는 사람 사번 : <input type="text" id="recipient"/><br><br>
-메일 제목 : <input type="text" id="title"/><br><br>
-메일 내용 : <br><br><textarea rows="20" cols="100" id="contents"></textarea><br><br>
-<button type="button" id="sendEmail">메일 보내기</button>
+<a href="#" onclick="window.open('/mailWriter.do', '', 'top=100px, left=100px, height=690px, width=850px')">메일 보내기</a>
 </body>
 <script>
-$(document).ready(function() {
-	$("#sendEmail").click(function() {
-		$.ajax({
-			url  : "/sendMail.do" , 
-			type : "post",
-			data : {sender : $("#sender").val(), recipient : $("#recipient").val() , title : $("#title").val(), contents : $("#contents").val()},
-			dataType : "json" ,
-			success  : function(data){
-				console.log(data)
-			}
-		});
-	});
-});
 
 /**
  * 전체 사용여부 조회

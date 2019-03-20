@@ -1,10 +1,14 @@
 package com.sinc.project.ctrl;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +30,11 @@ public class MainController {
 	
 	@Resource(name="mailService")
 	private MailService mailService;
+	
+	@RequestMapping(value = "/mailWriter.do", method = RequestMethod.GET)
+	public String mailWriter(Model model) {
+		return "mailWriter";
+	}
 	
 	/**
 	 * 전체 화장실 사용여부 조회
