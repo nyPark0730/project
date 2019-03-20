@@ -27,14 +27,13 @@
 <button type="button" id="updateMeetingRoomUseInfoBtn" onClick="updateInfo('meetingRoom');">회의실 사용여부 수정</button><br><br>
 <hr>
 <h4>메일 보내기</h4>
-보내는사람 사번:<input type="text" id="sender"/><br><br>
-받는 사람 사번:<input type="text" id="recipient"/><br><br>
-메일 제목:<input type="text" id="title"/><br><br>
-메일 내용:<input type="text" id="contents"/><br><br>
+보내는사람 사번 : <input type="text" id="sender"/><br><br>
+받는 사람 사번 : <input type="text" id="recipient"/><br><br>
+메일 제목 : <input type="text" id="title"/><br><br>
+메일 내용 : <br><br><textarea rows="20" cols="100" id="contents"></textarea><br><br>
 <button type="button" id="sendEmail">메일 보내기</button>
 </body>
 <script>
-
 $(document).ready(function() {
 	$("#sendEmail").click(function() {
 		$.ajax({

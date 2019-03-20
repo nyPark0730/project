@@ -84,7 +84,7 @@ public class MainController {
 	 * @param useyn
 	 * @return
 	 */
-	@RequestMapping(value="/updateToiletUseInfo.do", method=RequestMethod.POST)
+	@RequestMapping(value="/updateToiletUseInfo.do")
 	@ResponseBody
 	public int updateToiletUseInfo (int code, String useyn) {
 		
@@ -131,7 +131,7 @@ public class MainController {
 	 * @param useyn
 	 * @return
 	 */
-	@RequestMapping(value="/updateMeetingRoomUseInfo.do", method=RequestMethod.POST)
+	@RequestMapping(value="/updateMeetingRoomUseInfo.do")
 	@ResponseBody
 	public int updateMeetingRoomUseInfo (int code, String useyn) {
 		

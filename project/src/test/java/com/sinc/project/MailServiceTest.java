@@ -85,7 +85,7 @@ public class MailServiceTest {
 	
 	@Test
 	public void getMailTest() {
-		HashMap<String, Object> mailInfo = (HashMap<String, Object>) mailService.getMail(25);
+		HashMap<String, Object> mailInfo = (HashMap<String, Object>) mailService.getMail(47);
 		System.out.println(mailInfo.get("SENDERNAME"));
 		System.out.println(mailInfo);
 	}
