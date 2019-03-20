@@ -205,6 +205,19 @@ public class MainController {
 	}
 	
 	/**
+	 * 메일 상세내용 조회
+	 * @param mailseq
+	 * @return
+	 */
+	@RequestMapping(value="/getMail.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Object getMail (int mailseq) {
+		System.out.println("getMail Controller");
+		System.out.println("mailseq "+ mailseq);
+		return mailService.getMail(mailseq);	// 메일 상세내용 조회
+	}
+	
+	/**
 	 * 키워드 조회
 	 * @param memberseq
 	 * @return
