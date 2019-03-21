@@ -240,7 +240,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/addKeyword.do", method=RequestMethod.POST)
 	@ResponseBody
-	public Integer addKeyword (String memberseq, String keyword) {
+	public int addKeyword (String memberseq, String keyword) {
 		
 		System.out.println("addKeyword Controller");
 		System.out.println("memberseq "+ memberseq);

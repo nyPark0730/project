@@ -92,9 +92,10 @@ public class MailServiceImpl implements MailService {
          
 		JSONObject pushJobj = new JSONObject();
 		JSONObject jObjNotification = new JSONObject();
-		jObjNotification.put("title", mailSeq + "/" + senderInfo.getMembername() + "담당 (" + senderInfo.getTeam() + "팀)");
+		jObjNotification.put("title", senderInfo.getMembername() + "담당 (" + senderInfo.getTeam() + "팀)");
 		jObjNotification.put("body", title);
-		
+		jObjNotification.put("myicon", "R.drawable.app_logo");
+		jObjNotification.put("click_action", "OPEN_ACTIVITY");
 		JSONObject jObjData = new JSONObject();
 		jObjData.put("mailseq", mailSeq);
 		jObjData.put("title", senderInfo.getMembername() + " 담당 (" + senderInfo.getTeam() + "팀)");
@@ -102,7 +103,6 @@ public class MailServiceImpl implements MailService {
 		jObjData.put("clickAction", "MAILDETAILACTIVITY");
 		pushJobj.put("notification", jObjNotification);
 		pushJobj.put("to", memberToken);
-		pushJobj.put("click_action", "MAILDETAILACTIVITY");
 		pushJobj.put("data", jObjData);
 		
 		String pushInfo = pushJobj.toString();

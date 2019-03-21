@@ -74,7 +74,7 @@ public class MailServiceTest {
 		senderInfo.setTeam("에브리데이");
 		String recipient = "p90jxi";
 		String title = "물류 프로젝트 테스트 결과 공유드립니다.";
-		int mailSeq = 45;
+		int mailSeq =82;
 		mailService.sendFCM(senderInfo, recipient, title, mailSeq);
 	}
 	
