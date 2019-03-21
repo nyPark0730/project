@@ -22,13 +22,13 @@ public class MeetingRoomInfoServiceTest {
 	  private MeetingRoomInfoService meetingRoomInfoService;
 	  
 	  @Test
-	  public void getTotalToiletUseInfoTest() {
+	  public void getTotalMeetingRoomUseInfoTest() {
 		  List<Object> list = meetingRoomInfoService.getTotalMeetingRoomUseInfo();
 		  assertNotNull(list);
 	  }
 	  
 	  @Test
-	  public void getToiletUseInfoTest() {
+	  public void getMeetingRoomUseInfoTest() {
 		  List<Object> list = meetingRoomInfoService.getMeetingRoomUseInfo(9);
 		  assertNotNull(list);
 	  }

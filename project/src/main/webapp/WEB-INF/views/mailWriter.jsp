@@ -23,7 +23,7 @@
 		<hr>
 		<div class="form-inline form-group" style="margin-right: 2px; margin-left: 2px;margin-bottom: 2px;margin-top: 0px;">
 			<div style="width: 85px;"><font style="text-align: left;">받는 사람&nbsp;&nbsp;<span style="color: gray;">▼</span></font></div>
-			<img src="/resources/image/person.PNG" /><input type="text" size="110" id="sender" >
+			<img src="/resources/image/person.PNG" /><input type="text" size="110" id="recipient" >
 		</div>
 		<div class="form-inline form-group" style="margin: 2px;">
 			<div style="width: 108px;"><font style="text-align: left;">제목</font></div>
@@ -43,8 +43,8 @@
 <script>
 $(document).ready(function() {
 	$("#sendEmail").click(function() {
-		var sender = $("#sender").val();
-		var recipient = "p90jx1";
+		var sender = "p90jx1";
+		var recipient = $("#recipient").val();
 		var title = $("#title").val();
 		var contents = $("#contents").val();
 		if (0 == sender.length || 0 == recipient.length || 0 == title.length || 0 == contents.length) {
