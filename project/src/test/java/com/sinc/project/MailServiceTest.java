@@ -48,9 +48,9 @@ public class MailServiceTest {
 		
 		MailVO recipientMail = new MailVO(); 
 		recipientMail.setContents("안뇽~~~");
-		recipientMail.setRecipient("p90jx1"); 
-		recipientMail.setSender("p90jxi");
-		recipientMail.setSmode("SEND");
+		recipientMail.setRecipient("p90jxi"); 
+		recipientMail.setSender("p90jx1");
+		recipientMail.setSmode("RECEIVE");
 		recipientMail.setTitle("물류 프로젝트 테스트 결과 공유드립니다.");
 		mailService.addMail(recipientMail);
 		 

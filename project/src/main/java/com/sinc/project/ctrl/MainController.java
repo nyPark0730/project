@@ -190,8 +190,8 @@ public class MainController {
 		mailService.addMail(senderMail);	// 보내는 메일 정보 입력
 		
 		MailVO recipientMail = new MailVO();
-		recipientMail.setSender(recipient);
-		recipientMail.setRecipient(sender);
+		recipientMail.setSender(sender);
+		recipientMail.setRecipient(recipient);
 		recipientMail.setTitle(title);
 		recipientMail.setContents(contents);
 		recipientMail.setSmode("RECEIVE");
@@ -240,7 +240,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/addKeyword.do", method=RequestMethod.POST)
 	@ResponseBody
-	public int addKeyword (String memberseq, String keyword) {
+	public Integer addKeyword (String memberseq, String keyword) {
 		
 		System.out.println("addKeyword Controller");
 		System.out.println("memberseq "+ memberseq);
@@ -250,7 +250,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 키워드 삭제 후 조회
+	 * 키워드 삭제
 	 * @param memberseq
 	 * @param keyword
 	 * @return
