@@ -58,7 +58,7 @@ $(document).ready(function() {
 			data : {sender : sender , recipient : recipient, title : title, contents : contents},
 			dataType : "json" ,
 			success  : function(data){
-				console.log(data)
+				alert("메일 보내기 완료");
 			}
 		});
 		//window.close();

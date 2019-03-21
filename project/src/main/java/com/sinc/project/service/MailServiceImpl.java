@@ -92,12 +92,13 @@ public class MailServiceImpl implements MailService {
          
 		JSONObject pushJobj = new JSONObject();
 		JSONObject jObjNotification = new JSONObject();
-		jObjNotification.put("title", senderInfo.getMembername() + "담당 (" + senderInfo.getTeam() + "팀)");
+		jObjNotification.put("title", senderInfo.getMembername() + "담당 (" + senderInfo.getTeam() + ")");
 		jObjNotification.put("body", title);
+		jObjNotification.put("sound", "default");
 		jObjNotification.put("click_action", "OPEN_ACTIVITY");
 		JSONObject jObjData = new JSONObject();
 		jObjData.put("mailseq", mailSeq);
-		jObjData.put("title", senderInfo.getMembername() + " 담당 (" + senderInfo.getTeam() + "팀)");
+		jObjData.put("title", senderInfo.getMembername() + " 담당 (" + senderInfo.getTeam() + ")");
 		jObjData.put("body", title);
 		jObjData.put("clickAction", "MAILDETAILACTIVITY");
 		pushJobj.put("notification", jObjNotification);
