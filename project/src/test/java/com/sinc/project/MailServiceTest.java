@@ -74,13 +74,13 @@ public class MailServiceTest {
 		senderInfo.setTeam("에브리데이");
 		String recipient = "p90jxi";
 		String title = "물류 프로젝트 테스트 결과 공유드립니다.";
-		int mailSeq =82;
+		int mailSeq = 82;
 		mailService.sendFCM(senderInfo, recipient, title, mailSeq);
 	}
 	
 	@Test
 	public void compareKeywordTest() {
-		System.out.println(mailService.compareKeyword("p90jxi", "물류 프로젝트 테스트 결과 공유드립니다.")) ;
+		System.out.println(mailService.compareKeyword("p90jxi", "물류 프로젝트 테스트 결과 공유드립니다.", "안뇽~")) ;
 	}
 	
 	@Test

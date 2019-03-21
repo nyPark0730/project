@@ -197,7 +197,7 @@ public class MainController {
 		recipientMail.setSmode("RECEIVE");
 		int mailSeq = mailService.addMail(recipientMail);	// 받는 메일 정보 입력
 		
-		if (mailService.compareKeyword(recipient, title)) {	// 키워드와 메일 제목을 비교한 후 일치하는 경우 알람
+		if (mailService.compareKeyword(recipient, title, contents)) {	// 키워드와 메일 제목을 비교한 후 일치하는 경우 알람
 			MemberVO senderInfo = (MemberVO)mailService.getMemberInfo(sender);
 			mailService.sendFCM(senderInfo, recipient, title, mailSeq);
 		}

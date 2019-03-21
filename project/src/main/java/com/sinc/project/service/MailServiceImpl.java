@@ -94,7 +94,6 @@ public class MailServiceImpl implements MailService {
 		JSONObject jObjNotification = new JSONObject();
 		jObjNotification.put("title", senderInfo.getMembername() + "담당 (" + senderInfo.getTeam() + "팀)");
 		jObjNotification.put("body", title);
-		jObjNotification.put("myicon", "R.drawable.app_logo");
 		jObjNotification.put("click_action", "OPEN_ACTIVITY");
 		JSONObject jObjData = new JSONObject();
 		jObjData.put("mailseq", mailSeq);
@@ -144,14 +143,14 @@ public class MailServiceImpl implements MailService {
 		}
 	} 
 	
-	public boolean compareKeyword(String recipient, String title) {
+	public boolean compareKeyword(String recipient, String title, String contents) {
 		boolean flag = false;
 		List<Object> keywordList = getKeyword(recipient);
 		System.out.println("keywordList" + keywordList);
 		System.out.println("title "+title);
 		for (Object keywordvo : keywordList) {
 			String keyword = ((KeywordVO)keywordvo).getKeyword();
-			if (title.contains(keyword)) {
+			if (title.contains(keyword) || contents.contains(keyword)) {
 				flag = true;
 			}
 		}

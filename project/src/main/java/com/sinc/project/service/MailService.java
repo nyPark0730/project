@@ -61,7 +61,7 @@ public interface MailService {
 	 * @param title
 	 * @return
 	 */
-	public boolean compareKeyword(String recipient, String title);
+	public boolean compareKeyword(String recipient, String title, String contents);
 	
 	/**
 	 * 멤버 정보 조회
