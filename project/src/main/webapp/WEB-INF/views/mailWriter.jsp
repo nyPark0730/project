@@ -22,11 +22,13 @@
 		<button type="button" class="btn btn-outline-secondary text-dark btn-sm" style="margin-bottom: 0px;">닫기</button>
 		<hr>
 		<div class="form-inline form-group" style="margin-right: 2px; margin-left: 2px;margin-bottom: 2px;margin-top: 0px;">
-			<div style="width: 85px;"><font style="text-align: left;">받는 사람&nbsp;&nbsp;<span style="color: gray;">▼</span></font></div>
+			<div style="width: 90px;"><font style="text-align: left;">받는 사람&nbsp;&nbsp;<span style="color: gray;">▼</span></font></div>
 			<img src="/resources/image/person.PNG" /><input type="text" size="110" id="recipient" >
+			<div style="width: 90px;"><font style="text-align: left;">보내는 사람&nbsp;&nbsp;<span style="color: gray;">▼</span></font></div>
+			<img src="/resources/image/person.PNG" /><input type="text" size="110" id="sender" >
 		</div>
 		<div class="form-inline form-group" style="margin: 2px;">
-			<div style="width: 108px;"><font style="text-align: left;">제목</font></div>
+			<div style="width: 113px;"><font style="text-align: left;">제목</font></div>
 			<input type="text" size="110" id="title">
 		</div>
 		<div class="form-inline form-group" style="margin: 2px;">
@@ -43,7 +45,7 @@
 <script>
 $(document).ready(function() {
 	$("#sendEmail").click(function() {
-		var sender = "p90jx1";
+		var sender = $("#sender").val();
 		var recipient = $("#recipient").val();
 		var title = $("#title").val();
 		var contents = $("#contents").val();
