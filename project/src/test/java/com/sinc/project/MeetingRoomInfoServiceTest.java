@@ -35,7 +35,7 @@ public class MeetingRoomInfoServiceTest {
 	  
 	  @Test
 	  public void updateToiletUseInfoTest() {
-		 int updateResult = meetingRoomInfoService.updateMeetingRoomUseInfo(10, "N");
+		 int updateResult = meetingRoomInfoService.updateMeetingRoomUseInfo(25, "N");
 		 System.out.println("updateResult " + updateResult);
 	  }
 

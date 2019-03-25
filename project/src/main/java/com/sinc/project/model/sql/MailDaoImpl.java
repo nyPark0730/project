@@ -61,5 +61,9 @@ public class MailDaoImpl implements MailDao {
 		System.out.println("MailDaoImpl getMail");
 		return session.selectOne("com.sinc.project.mailSystem.getMail", obj);
 	}
-
+	
+	@Override
+	public int addMember(Object obj) {
+		return session.insert("com.sinc.project.mailSystem.addMember", obj);
+	}
 }

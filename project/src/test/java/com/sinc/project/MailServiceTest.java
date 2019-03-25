@@ -72,7 +72,7 @@ public class MailServiceTest {
 		MemberVO senderInfo = new MemberVO();
 		senderInfo.setMembername("박나영");
 		senderInfo.setTeam("에브리데이");
-		String recipient = "p90jxi";
+		String recipient = "p90jx1";
 		String title = "물류 프로젝트 테스트 결과 공유드립니다.";
 		int mailSeq = 82;
 		mailService.sendFCM(senderInfo, recipient, title, mailSeq);
@@ -93,5 +93,31 @@ public class MailServiceTest {
 		HashMap<String, Object> mailInfo = (HashMap<String, Object>) mailService.getMail(47);
 		System.out.println(mailInfo.get("SENDERNAME"));
 		System.out.println(mailInfo);
+	}
+	
+	@Test
+	public void setMemberTest() {
+		MemberVO mv = new MemberVO();
+//		mv.setMemberseq("p90jxi");
+//		mv.setMembername("최필성");
+//		mv.setDepartment("ITO2");
+//		mv.setTeam("면세점팀");
+//		mv.setPhone("010-9347-9656");
+//		mv.setEmail("p90jxi@shinsegae.com");
+		
+//		mv.setMemberseq("p90jx1");
+//		mv.setMembername("박나영");
+//		mv.setDepartment("ITO2");
+//		mv.setTeam("에브리데이팀");
+//		mv.setPhone("010-4736-0417");
+//		mv.setEmail("p90jx1@shinsegae.com");
+		
+		mv.setMemberseq("p90jwv");
+		mv.setMembername("김지영");
+		mv.setDepartment("ITO2");
+		mv.setTeam("프로퍼티팀");
+		mv.setPhone("010-5955-6689");
+		mv.setEmail("p90jwv@shinsegae.com");
+		mailService.addMember(mv);
 	}
 }

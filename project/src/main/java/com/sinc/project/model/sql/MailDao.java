@@ -21,4 +21,6 @@ public interface MailDao {
 	public Object getMemberInfo(Object obj);
 	
 	public Object getMail(Object obj);
+	
+	public int addMember(Object obj);
 }

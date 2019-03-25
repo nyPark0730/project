@@ -43,7 +43,7 @@ public class ToiletInfoServiceTest {
 	  
 	  @Test
 	  public void updateToiletUseInfoTest() {
-		 int updateResult = toiletInfoService.updateToiletUseInfo(25, "Y");
+		 int updateResult = toiletInfoService.updateToiletUseInfo(24, "N");
 		 System.out.println("updateResult " + updateResult);
 	  }
 

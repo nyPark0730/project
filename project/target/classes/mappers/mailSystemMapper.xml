@@ -75,5 +75,11 @@
 			MAILSEQ = #{mailseq}
 			AND SMODE = 'RECEIVE'
 	</select>
+	
+	
+	<insert id="addMember" parameterType="memberinfo">
+		INSERT INTO MEMBER
+		VALUES(#{memberseq}, #{membername}, #{department}, #{team}, #{phone}, #{email})
+	</insert>
 </mapper>
 

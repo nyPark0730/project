@@ -76,4 +76,10 @@ public interface MailService {
 	 * @return
 	 */
 	public Object getMail(int mailseq);
+	
+	/**
+	 * 멤버 추가
+	 */
+	public void addMember(MemberVO memberinfo);
+
 }

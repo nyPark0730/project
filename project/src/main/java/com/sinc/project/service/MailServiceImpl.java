@@ -151,7 +151,7 @@ public class MailServiceImpl implements MailService {
 		System.out.println("title "+title);
 		for (Object keywordvo : keywordList) {
 			String keyword = ((KeywordVO)keywordvo).getKeyword();
-			if (title.contains(keyword) || contents.contains(keyword)) {
+			if (title.toLowerCase().contains(keyword.toLowerCase()) || contents.toLowerCase().contains(keyword.toLowerCase())) {
 				flag = true;
 			}
 		}
@@ -169,5 +169,9 @@ public class MailServiceImpl implements MailService {
 		mailVo.setMailseq(mailseq);
 		return mailDao.getMail(mailVo);
 	}
-
+	
+	@Override
+	public void addMember(MemberVO memberinfo) {
+		System.out.println(mailDao.addMember(memberinfo));
+	}
 }
