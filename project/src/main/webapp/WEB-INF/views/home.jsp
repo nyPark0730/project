@@ -9,6 +9,22 @@
 </head>
 <body>
 <h4>화장실 사용현황</h4>
+
+<button type="button" id="" onclick="updateToilet('1');">22 사용O</button>
+<button type="button" id="" onclick="updateToilet('2');">22 사용X</button><br><br>
+<button type="button" id="" onclick="updateToilet('3');">23 사용O</button>
+<button type="button" id="" onclick="updateToilet('4');">23 사용X</button><br><br>
+<button type="button" id="" onclick="updateToilet('5');">24 사용O</button>
+<button type="button" id="" onclick="updateToilet('6');">24 사용X</button><br><br>
+
+<h4>회의실 사용현황</h4>
+<button type="button" id="" onclick="updateMeetingRoom('1');">24 사용O</button>
+<button type="button" id="" onclick="updateMeetingRoom('2');">24 사용N</button><br><br>
+<button type="button" id="" onclick="updateMeetingRoom('3');">25 사용O</button>
+<button type="button" id="" onclick="updateMeetingRoom('4');">25 사용N</button><br><br>
+<br><br>
+
+
 <button type="button" id="getTotalToiletUseInfoBtn" onclick="getTotalInfo('toilet');">전체 화장실 사용 현황</button><br><br>
 <hr />
 층:<input type="text" id="toiletfloor" /> 성별:<input type="text" id="gender" />의 <button type="button" id="getToiletUseInfoBtn"  onclick="getInfo('toilet');">화장실 사용 현황</button><br><br>
@@ -87,6 +103,74 @@ function getInfo(mode) {
 		}
 	});
 }
+
+
+function updateMeetingRoom(number) {
+	var url = "/updateMeetingRoomUseInfo.do";
+	var code = 0;
+	var useyn = "Y";
+	
+	if (number == 1) {
+		code = 24;
+		useyn = "Y"
+	} else if (number == 2) {
+		code = 24;
+		useyn = "N";
+	} else if (number == 3) {
+		code = 25;
+		useyn = "Y"
+	} else if (number == 4) {
+		code = 25;
+		useyn = "N";
+	} 
+	
+	$.ajax({
+		url : url,
+		type : "post",
+		data : { code : code, useyn : useyn},
+		dataType : "json",
+		success : function (data) {
+			console.log(data);
+		}
+	});
+}
+
+function updateToilet(number) {
+	var url = "/updateToiletUseInfo.do";
+	var code = 0;
+	var useyn = "Y";
+	
+	if (number == 1) {
+		code = 22;
+		useyn = "Y";
+	} else if (number == 2) {
+		code = 22;
+		useyn = "N";
+	} else if (number == 3) {
+		code = 23;
+		useyn = "Y";
+	} else if (number == 4) {
+		code = 23;
+		useyn = "N";
+	} else if (number == 5) {
+		code = 24;
+		useyn = "Y";
+	} else if (number == 6) {
+		code = 24;
+		useyn = "N";
+	}
+	
+	$.ajax({
+		url : url,
+		type : "post",
+		data : { code : code, useyn : useyn},
+		dataType : "json",
+		success : function (data) {
+			console.log(data);
+		}
+	});
+}
+
 
 /**
  * 사용여부 수정
